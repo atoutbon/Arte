@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte em Pauta — Colégio Concórdia</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sepia: {
+                            50: '#fcfbfa',
+                            100: '#f4f1ea',
+                            200: '#e5decb',
+                            300: '#d4c9ad',
+                            800: '#5c5344',
+                            900: '#3d372c',
+                        },
+                        academic: {
+                            dark: '#1e232a',
+                            gold: '#b89753',
+                            accent: '#2c3e50'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Merriweather', serif; }
+        
+        /* REGRA CRÍTICA DE IMPRESSÃO: Oculta tudo na tela exceto o relatório final */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print, header, footer, main > section:not(#resumo-card) {
+                display: none !important;
+            }
+            #resumo-card {
+                display: block !important;
+                position: relative !important;
+                width: 100% !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-sepia-50 text-academic-dark min-h-screen flex flex-col antialiased selection:bg-academic-gold selection:text-white">
+
+    <header class="bg-white border-b border-sepia-200 sticky top-0 z-50 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-academic-dark flex items-center justify-center text-academic-gold font-bold text-2xl shadow">
+                    🎓
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl sm:text-2xl tracking-tight text-academic-dark font-serif">Colégio Concórdia</h1>
+                    <p class="text-xs text-sepia-800 uppercase tracking-widest font-semibold">Arte em Pauta — Do Museu ao ENEM</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:block text-right border-l border-sepia-200 pl-4">
+                    <span class="text-xs font-semibold text-academic-gold block uppercase">Atividade de Linguagens</span>
+                    <span class="text-xs text-sepia-800">Ensino Médio / Pré-VEST</span>
+                </div>
+                <button onclick="gerarEImprimir()" class="bg-academic-gold hover:bg-yellow-600 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 shadow">
+                    <span>🖨️</span> <span class="hidden sm:inline">Imprimir / Salvar</span> PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- MÓDULO DE COMPETÊNCIAS DO ENEM -->
+        <section class="bg-academic-dark text-white rounded-2xl p-6 sm:p-8 shadow-md no-print space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-700 pb-4">
+                <div>
+                    <span class="text-xs font-bold text-academic-gold uppercase tracking-wider">Matriz de Referência do ENEM</span>
+                    <h2 class="text-xl sm:text-2xl font-bold font-serif text-white">Competências de Arte e Linguagens no ENEM</h2>
+                </div>
+                <span class="text-3xl">📚</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div class="bg-stone-800/80 p-5 rounded-xl border border-gray-700 space-y-2">
+                    <div class="flex items-center gap-2 text-academic-gold font-bold">
+                        <span class="bg-academic-gold text-academic-dark px-2 py-0.5 rounded text-xs font-black">C4</span>
+                        <h3>Competência 4 — Linguagem Artística & Função Social</h3>
+                    </div>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Reconhecer a arte como geradora de significado, analisando os elementos da linguagem visual (cores, formas, composição) e sua intenção comunicativa em questões de Linguagens.
+                    </p>
+                </div>
+
+                <div class="bg-stone-800/80 p-5 rounded-xl border border-gray-700 space-y-2">
+                    <div class="flex items-center gap-2 text-academic-gold font-bold">
+                        <span class="bg-academic-gold text-academic-dark px-2 py-0.5 rounded text-xs font-black">Redação</span>
+                        <h3>Competência 2 — Repertório Sociocultural Legítimo</h3>
+                    </div>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Usar obras de arte como repertório produtivo e legítimo para embasar teses e argumentos na Redação, conectando-as aos eixos temáticos sociais.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO EXEMPLO MODELO RESOLVIDO PARA ORIENTAÇÃO -->
+        <section class="bg-white border-2 border-academic-gold/60 rounded-2xl p-6 sm:p-8 shadow-md relative overflow-hidden no-print">
+            <div class="absolute top-0 right-0 bg-academic-gold text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest">
+                Guia Passo a Passo: Como Fazer
+            </div>
+            
+            <div class="mb-6">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-sepia-100 text-academic-gold mb-2 uppercase tracking-wider">Passo a Passo Guiado</span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-serif text-academic-dark">Exemplo Prático: Como Fazer a Sua Análise</h2>
+                <p class="text-sepia-800 text-sm mt-1">Siga a estrutura abaixo para preencher o formulário do seu grupo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-sepia-50 p-5 rounded-xl border border-sepia-200 text-sm">
+                <div class="space-y-3 lg:col-span-1">
+                    <div class="h-48 bg-stone-100 rounded-lg overflow-hidden relative flex items-center justify-center border border-sepia-300 p-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/480px-The_Scream.jpg" 
+                             alt="O Grito - Edvard Munch" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=O+Grito+-+Munch';"
+                             class="max-h-full max-w-full object-contain rounded shadow-sm">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-academic-dark font-serif">Exemplo da Obra: "O Grito" (Edvard Munch)</h4>
+                        <p class="text-xs text-academic-gold font-medium">Expressionismo (1893)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 lg:col-span-2 text-xs text-sepia-800">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-white p-3 rounded-lg border border-sepia-200 space-y-1">
+                            <strong class="text-[11px] font-bold uppercase text-academic-gold block">Passo 1: Leitura Visual</strong>
+                            <p>Descreva elementos de cor, forma e a intenção do artista (ex.: cores quentes, traços ondulados e a figura disforme expressando pânico).</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-sepia-200 space-y-1">
+                            <strong class="text-[11px] font-bold uppercase text-academic-gold block">Passo 2: Problema Social</strong>
+                            <p>Identifique a denúncia por trás do quadro (ex.: o isolamento e o sofrimento psíquico causados pelas pressões da vida urbana).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-sepia-200 space-y-1">
+                        <strong class="text-[11px] font-bold uppercase text-academic-gold block">Passo 3: Aplicação na Redação (Exemplo Prático)</strong>
+                        <p class="italic font-serif text-academic-dark">
+                            "Em analogia à tela 'O Grito', do pintor Edvard Munch — que retrata a figura humana em profunda angústia e desolamento diante de um ambiente sufocante —, observa-se que, no Brasil contemporâneo, os crescentes índices de ansiedade entre os jovens espelham o sufocamento emocional promovido pela rotina acelerada e pela sobrecarga digital."
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-sepia-200 space-y-1">
+                        <strong class="text-[11px] font-bold uppercase text-academic-gold block">Passo 4: Como viraria questão no ENEM</strong>
+                        <p>A prova cobraria o uso de traços expressionistas para materializar sentimentos subjetivos da sociedade moderna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="space-y-6 no-print">
+            <div class="bg-white border border-sepia-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="max-w-3xl">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-sepia-100 text-academic-gold mb-2 uppercase tracking-wider">Etapa 1: Acervo de Estudo</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-serif text-academic-dark mb-2">Obras para Seleção</h2>
+                    <p class="text-sepia-800 text-sm leading-relaxed">
+                        Escolha duas obras abaixo para fundamentar a análise comparativa do seu grupo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Obra 1: Operários -->
+                <div class="bg-white border border-sepia-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-stone-100 relative overflow-hidden flex items-center justify-center border-b border-sepia-200 p-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/a/a2/Oper%C3%A1rios_%28Tarsila_do_Amaral%29.jpg/600px-Oper%C3%A1rios_%28Tarsila_do_Amaral%29.jpg" 
+                                 alt="Operários - Tarsila do Amaral" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=Oper%C3%A1rios+-+Tarsila';"
+                                 class="max-h-full max-w-full object-contain rounded">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold font-serif text-academic-dark">Operários — Tarsila do Amaral</h3>
+                            <p class="text-xs text-sepia-800 mt-2">Trabalho, industrialização, diversidade étnica e apagamento das individualidades.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 2: O Grito -->
+                <div class="bg-white border border-sepia-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-stone-100 relative overflow-hidden flex items-center justify-center border-b border-sepia-200 p-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/480px-The_Scream.jpg" 
+                                 alt="O Grito - Edvard Munch" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=O+Grito+-+Munch';"
+                                 class="max-h-full max-w-full object-contain rounded">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold font-serif text-academic-dark">O Grito — Edvard Munch</h3>
+                            <p class="text-xs text-sepia-800 mt-2">Saúde mental, angústia existencial, isolamento e os males da vida urbana moderna.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 3: Circuitos Ideológicos -->
+                <div class="bg-white border border-sepia-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-stone-100 relative overflow-hidden flex items-center justify-center border-b border-sepia-200 p-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/c/cd/Inser%C3%A7%C3%B5es_em_Circuitos_Ideol%C3%B3gicos.jpg/500px-Inser%C3%A7%C3%B5es_em_Circuitos_Ideol%C3%B3gicos.jpg" 
+                                 alt="Inserções em Circuitos Ideológicos - Cildo Meireles" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=Circuitos+Ideol%C3%B3gicos';"
+                                 class="max-h-full max-w-full object-contain rounded">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold font-serif text-academic-dark">Inserções em Circuitos Ideológicos — Cildo Meireles</h3>
+                            <p class="text-xs text-sepia-800 mt-2">Circulação da informação, crítica ao consumismo de massa e ditadura/resistência.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 4: A Redenção de Cam -->
+                <div class="bg-white border border-sepia-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-stone-100 relative overflow-hidden flex items-center justify-center border-b border-sepia-200 p-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/A_Reden%C3%A7%C3%A3o_de_Cam.jpg/640px-A_Reden%C3%A7%C3%A3o_de_Cam.jpg" 
+                                 alt="A Redenção de Cam - Modesto Brocos" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=A+Reden%C3%A7%C3%A3o+de+Cam';"
+                                 class="max-h-full max-w-full object-contain rounded">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold font-serif text-academic-dark">A Redenção de Cam — Modesto Brocos</h3>
+                            <p class="text-xs text-sepia-800 mt-2">Racismo estrutural, teorias raciais/eugenia e construção da identidade pós-escravidão.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 5: Abaporu -->
+                <div class="bg-white border border-sepia-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-stone-100 relative overflow-hidden flex items-center justify-center border-b border-sepia-200 p-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/d/d3/Abaporu.jpg/500px-Abaporu.jpg" 
+                                 alt="Abaporu - Tarsila do Amaral" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=Abaporu+-+Tarsila';"
+                                 class="max-h-full max-w-full object-contain rounded">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold font-serif text-academic-dark">Abaporu — Tarsila do Amaral</h3>
+                            <p class="text-xs text-sepia-800 mt-2">Movimento Antropofágico, assimilação cultural europeia e valorização das raízes nacionais.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 6: Os Retirantes -->
+                <div class="bg-white border border-sepia-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-stone-100 relative overflow-hidden flex items-center justify-center border-b border-sepia-200 p-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8d/Retirantes_Portinari.jpg/600px-Retirantes_Portinari.jpg" 
+                                 alt="Os Retirantes - Candido Portinari" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e232a/b89753?text=Os+Retirantes+-+Portinari';"
+                                 class="max-h-full max-w-full object-contain rounded">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-base font-bold font-serif text-academic-dark">Os Retirantes — Candido Portinari</h3>
+                            <p class="text-xs text-sepia-800 mt-2">Seca no Nordeste, migração forçada, fome e desigualdade socioeconômica regional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white border border-sepia-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 no-print">
+            <div class="border-b border-sepia-200 pb-4">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-sepia-100 text-academic-gold mb-2 uppercase tracking-wider">Etapa 2: Preenchimento do Grupo</span>
+                <h2 class="text-xl sm:text-2xl font-bold font-serif text-academic-dark">Roteiro de Análise Comparativa (Duas Obras)</h2>
+            </div>
+
+            <form id="atividade-form" onsubmit="event.preventDefault(); gerarResumo();" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-academic-dark mb-2">Integrantes do Grupo:</label>
+                        <input type="text" id="input-grupo" required placeholder="Ex: Lucas, Mariana e Beatriz (3º Ano A)" class="w-full bg-sepia-50 border border-sepia-300 rounded-xl px-4 py-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-academic-dark mb-2">Primeira Obra (Obra A):</label>
+                        <select id="input-obra" required class="w-full bg-sepia-50 border border-sepia-300 rounded-xl px-4 py-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold">
+                            <option value="">Selecione a 1ª obra...</option>
+                            <option value="1">Operários — Tarsila do Amaral</option>
+                            <option value="2">O Grito — Edvard Munch</option>
+                            <option value="3">Inserções em Circuitos Ideológicos — Cildo Meireles</option>
+                            <option value="4">A Redenção de Cam — Modesto Brocos</option>
+                            <option value="5">Abaporu — Tarsila do Amaral</option>
+                            <option value="6">Os Retirantes — Candido Portinari</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-academic-dark mb-2">Segunda Obra (Obra B):</label>
+                        <select id="input-obra-2" required class="w-full bg-sepia-50 border border-sepia-300 rounded-xl px-4 py-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold">
+                            <option value="">Selecione a 2ª obra...</option>
+                            <option value="1">Operários — Tarsila do Amaral</option>
+                            <option value="2">O Grito — Edvard Munch</option>
+                            <option value="3">Inserções em Circuitos Ideológicos — Cildo Meireles</option>
+                            <option value="4">A Redenção de Cam — Modesto Brocos</option>
+                            <option value="5">Abaporu — Tarsila do Amaral</option>
+                            <option value="6">Os Retirantes — Candido Portinari</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="border-t border-sepia-200 pt-6 space-y-4">
+                    <h3 class="text-base font-bold font-serif text-academic-dark">A. Análise Individual das Obras Escolhidas</h3>
+                    
+                    <!-- Espaço para Obra A -->
+                    <div class="bg-sepia-50 p-4 rounded-xl border border-sepia-200 space-y-3">
+                        <h4 class="font-bold text-sm text-academic-gold uppercase tracking-wider">Análise da Primeira Obra (Obra A)</h4>
+                        <div>
+                            <label class="block text-xs font-semibold text-academic-dark mb-1">Elementos Visuais, Estilo e Denúncia Social da Obra A:</label>
+                            <textarea id="input-analise-obra-1" rows="3" required placeholder="Descreva as cores, formas, sentimentos e o problema social abordado na Obra A..." class="w-full bg-white border border-sepia-300 rounded-lg p-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Espaço para Obra B -->
+                    <div class="bg-sepia-50 p-4 rounded-xl border border-sepia-200 space-y-3">
+                        <h4 class="font-bold text-sm text-academic-gold uppercase tracking-wider">Análise da Segunda Obra (Obra B)</h4>
+                        <div>
+                            <label class="block text-xs font-semibold text-academic-dark mb-1">Elementos Visuais, Estilo e Denúncia Social da Obra B:</label>
+                            <textarea id="input-analise-obra-2" rows="3" required placeholder="Descreva as cores, formas, sentimentos e o problema social abordado na Obra B..." class="w-full bg-white border border-sepia-300 rounded-lg p-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Espaço para Relação Comparativa -->
+                    <div>
+                        <label class="block text-sm font-semibold text-academic-dark mb-2">Síntese Comparativa (Ponto em Comum ou Contraste entre Obra A e Obra B):</label>
+                        <textarea id="input-problema" rows="3" required placeholder="Qual problema social, histórico ou humano conecta ou contrapõe essas duas obras?..." class="w-full bg-sepia-50 border border-sepia-300 rounded-xl p-4 text-sm text-academic-dark focus:outline-none focus:border-academic-gold"></textarea>
+                    </div>
+                </div>
+
+                <div class="border-t border-sepia-200 pt-6 space-y-4">
+                    <h3 class="text-base font-bold font-serif text-academic-dark">B. Conexão Redação & Questões de Linguagens do ENEM</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-academic-dark mb-2">Eixo Temático Compartilhado:</label>
+                            <input type="text" id="input-eixo" required placeholder="Ex: Direitos Humanos, Trabalho, Saúde Mental..." class="w-full bg-sepia-50 border border-sepia-300 rounded-xl px-4 py-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-academic-dark mb-2">Tema Inédito Hipotético de Redação:</label>
+                            <input type="text" id="input-tema" required placeholder="Ex: Caminhos para combater a desigualdade social no Brasil..." class="w-full bg-sepia-50 border border-sepia-300 rounded-xl px-4 py-3 text-sm text-academic-dark focus:outline-none focus:border-academic-gold">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-academic-dark mb-2">Parágrafo de Repertório Sociocultural Articulando as Duas Obras (Competência 2 da Redação):</label>
+                        <textarea id="input-repertorio" rows="4" required placeholder="Escreva o parágrafo citando ambas as obras para fundamentar seu argumento..." class="w-full bg-sepia-50 border border-sepia-300 rounded-xl p-4 text-sm text-academic-dark focus:outline-none focus:border-academic-gold"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-academic-dark mb-2">Foco da Questão de Linguagens (Como o ENEM cobraria essas duas obras numa questão objetiva?):</label>
+                        <textarea id="input-foco-questao" rows="3" required placeholder="Ex: A questão cobraria a comparação entre o Expressionismo e o Modernismo brasileiro na representação das dores sociais..." class="w-full bg-sepia-50 border border-sepia-300 rounded-xl p-4 text-sm text-academic-dark focus:outline-none focus:border-academic-gold"></textarea>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-academic-dark text-white py-4 rounded-xl text-base font-bold hover:bg-academic-accent transition shadow-md flex items-center justify-center gap-2">
+                        📄 Gerar Relatório Comparativo das Obras
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- DOCUMENTO FINAL GERADO (ÚNICO ELEMENTO VISÍVEL NA IMPRESSÃO/PDF) -->
+        <section id="resumo-card" class="hidden bg-white border-2 border-academic-gold rounded-2xl p-6 sm:p-10 shadow-lg space-y-6">
+            
+            <!-- Cabeçalho Oficial para Impressão -->
+            <div class="border-b-2 border-academic-dark pb-6 flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold font-serif text-academic-dark uppercase">Colégio Concórdia</h2>
+                    <p class="text-xs text-academic-gold uppercase tracking-widest font-bold">Relatório de Atividade — Estudo Comparativo de Obras (ENEM)</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-sepia-800 font-medium block" id="res-data"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm bg-sepia-50 p-4 rounded-xl border border-sepia-200">
+                <div>
+                    <strong class="text-academic-dark block text-xs uppercase tracking-wider">Integrantes do Grupo:</strong>
+                    <span id="res-grupo" class="text-sepia-800 font-semibold"></span>
+                </div>
+                <div>
+                    <strong class="text-academic-dark block text-xs uppercase tracking-wider">Obras Selecionadas para Análise Comparativa:</strong>
+                    <span id="res-titulo-obra" class="text-sepia-800 font-semibold block"></span>
+                    <span id="res-titulo-obra-2" class="text-sepia-800 font-semibold block"></span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-sm text-sepia-800">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border-l-4 border-academic-gold pl-4 py-1 bg-sepia-50 rounded-r-xl p-3">
+                        <strong class="block text-academic-dark font-serif mb-1 text-xs uppercase tracking-wider">Análise da Obra A:</strong>
+                        <p id="res-analise-1" class="text-xs"></p>
+                    </div>
+                    <div class="border-l-4 border-academic-gold pl-4 py-1 bg-sepia-50 rounded-r-xl p-3">
+                        <strong class="block text-academic-dark font-serif mb-1 text-xs uppercase tracking-wider">Análise da Obra B:</strong>
+                        <p id="res-analise-2" class="text-xs"></p>
+                    </div>
+                </div>
+                <div class="border-l-4 border-academic-gold pl-4 py-1">
+                    <strong class="block text-academic-dark font-serif mb-1">Síntese Comparativa entre as Obras:</strong>
+                    <p id="res-problema"></p>
+                </div>
+                <div class="border-l-4 border-academic-gold pl-4 py-1">
+                    <strong class="block text-academic-dark font-serif mb-1">Eixo Temático & Proposta de Redação:</strong>
+                    <p><strong>Eixo:</strong> <span id="res-eixo"></span></p>
+                    <p><strong>Tema Hipotético:</strong> <span id="res-tema"></span></p>
+                </div>
+                <div class="border-l-4 border-green-700 pl-4 py-2 bg-green-50 rounded-r-xl">
+                    <strong class="block text-green-900 font-serif mb-1">Aplicação de Repertório Comparativo (Competência 2):</strong>
+                    <p id="res-repertorio" class="italic text-green-950 font-medium"></p>
+                </div>
+                <div class="border-l-4 border-academic-accent pl-4 py-2 bg-slate-50 rounded-r-xl">
+                    <strong class="block text-academic-dark font-serif mb-1">Análise para Questões da Prova de Linguagens (Competências 1 e 4):</strong>
+                    <p id="res-foco-questao" class="text-xs text-academic-dark"></p>
+                </div>
+            </div>
+
+            <!-- Botão Único para Imprimir/Salvar PDF -->
+            <div class="pt-6 border-t border-sepia-200 no-print flex justify-end">
+                <button onclick="window.print()" class="bg-green-700 hover:bg-green-800 text-white px-8 py-3.5 rounded-xl text-base font-bold transition shadow-md flex items-center gap-3">
+                    📥 Salvar / Enviar PDF
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-sepia-200 mt-12 py-6 text-center text-xs text-sepia-800 no-print">
+        <p>Colégio Concórdia &bull; Atividade de Linguagens, Artes e Redação ENEM</p>
+    </footer>
+
+    <script>
+        const nomesObras = {
+            "1": 'Operários — Tarsila do Amaral',
+            "2": 'O Grito — Edvard Munch',
+            "3": 'Inserções em Circuitos Ideológicos — Cildo Meireles',
+            "4": 'A Redenção de Cam — Modesto Brocos',
+            "5": 'Abaporu — Tarsila do Amaral',
+            "6": 'Os Retirantes — Candido Portinari'
+        };
+
+        function gerarResumo() {
+            const grupo = document.getElementById('input-grupo').value;
+            const obraVal1 = document.getElementById('input-obra').value;
+            const obraVal2 = document.getElementById('input-obra-2').value;
+            const analiseObra1 = document.getElementById('input-analise-obra-1').value;
+            const analiseObra2 = document.getElementById('input-analise-obra-2').value;
+            const problema = document.getElementById('input-problema').value;
+            const eixo = document.getElementById('input-eixo').value;
+            const tema = document.getElementById('input-tema').value;
+            const repertorio = document.getElementById('input-repertorio').value;
+            const focoQuestao = document.getElementById('input-foco-questao').value;
+
+            document.getElementById('res-titulo-obra').innerText = `• Obra A: ${nomesObras[obraVal1] || "Primeira Obra"}`;
+            document.getElementById('res-titulo-obra-2').innerText = `• Obra B: ${nomesObras[obraVal2] || "Segunda Obra"}`;
+            document.getElementById('res-grupo').innerText = grupo;
+            document.getElementById('res-analise-1').innerText = analiseObra1;
+            document.getElementById('res-analise-2').innerText = analiseObra2;
+            document.getElementById('res-eixo').innerText = eixo;
+            document.getElementById('res-problema').innerText = problema;
+            document.getElementById('res-tema').innerText = tema;
+            document.getElementById('res-repertorio').innerText = `"${repertorio}"`;
+            document.getElementById('res-foco-questao').innerText = focoQuestao;
+            
+            const hoje = new Date();
+            document.getElementById('res-data').innerText = `Data: ${hoje.toLocaleDateString('pt-BR')}`;
+
+            const resumoCard = document.getElementById('resumo-card');
+            resumoCard.classList.remove('hidden');
+            resumoCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function gerarEImprimir() {
+            const form = document.getElementById('atividade-form');
+            if (form.checkValidity()) {
+                gerarResumo();
+                setTimeout(() => window.print(), 300);
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
+</body>
+</html>
